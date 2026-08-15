@@ -1,0 +1,890 @@
+/* =============================================================================
+   Hot Shots Tennis League — design system
+   Ported wholesale from the original single-file app (hot-shots-tennis-league-6.html).
+   Do not rebuild — this is the intentional visual language for this feature,
+   deliberately matched to KT Academy's branding. See DESIGN.md.
+   ============================================================================= */
+
+.tennis-root {
+  --ink: #122544;
+  --ink-dark: #0a1a30;
+  --ink-soft: #1d3760;
+  --lime: #6fa82c;
+  --lime-dark: #517d1f;
+  --gold: #e7a93c;
+  --bg: #f5f6f1;
+  --card: #ffffff;
+  --line: #e3e6dc;
+  --text: #28303f;
+  --muted: #727c8c;
+  --danger: #c0483a;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(10, 26, 48, 0.08);
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Work Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+.tennis-root * {
+  box-sizing: border-box;
+}
+.tennis-root h1,
+.tennis-root h2,
+.tennis-root h3,
+.tennis-root .display {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+  margin: 0;
+}
+.tennis-root .num,
+.tennis-root table.ladder td.num,
+.tennis-root .score {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.tennis-root a {
+  color: inherit;
+}
+.tennis-root button {
+  font-family: inherit;
+  cursor: pointer;
+}
+.tennis-root .court-texture {
+  background-image:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 64px),
+    linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 55%, var(--ink) 100%);
+}
+
+/* ---------- NAV ---------- */
+.tennis-root header.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--ink);
+  border-bottom: 3px solid var(--lime);
+  transition: border-color 0.25s ease;
+}
+.tennis-root .nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.tennis-root .brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0;
+}
+.tennis-root .brand .wordmark {
+  font-family: 'Archivo Black', sans-serif;
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+}
+.tennis-root .brand .wordmark span {
+  color: var(--lime);
+  transition: color 0.25s ease;
+}
+.tennis-root .brand .sub {
+  color: #9fb0c7;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+.tennis-root nav.links {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.tennis-root nav.links button,
+.tennis-root nav.links a {
+  background: none;
+  border: none;
+  color: #c9d3e2;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+}
+.tennis-root nav.links button:hover,
+.tennis-root nav.links a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.tennis-root nav.links button.active,
+.tennis-root nav.links a.active {
+  color: var(--ink);
+  background: var(--lime);
+}
+
+/* ---------- LEAGUE SWITCHER ---------- */
+.tennis-root .league-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.tennis-root .league-bar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.tennis-root .league-bar-label {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.tennis-root .league-toggle {
+  display: flex;
+  gap: 8px;
+}
+.tennis-root .league-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 22px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--text);
+}
+.tennis-root .league-btn .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.tennis-root .league-btn.active {
+  border-color: transparent;
+  color: #fff;
+}
+.tennis-root .league-btn[data-lg='green'] .dot {
+  background: #6fa82c;
+}
+.tennis-root .league-btn[data-lg='orange'] .dot {
+  background: #e2822e;
+}
+.tennis-root .league-btn[data-lg='green'].active {
+  background: #6fa82c;
+}
+.tennis-root .league-btn[data-lg='orange'].active {
+  background: #e2822e;
+}
+.tennis-root .league-btn.active .dot {
+  background: #fff;
+}
+
+.tennis-root main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+.tennis-root .view {
+  animation: tennisFadeIn 0.25s ease;
+}
+@keyframes tennisFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- HERO ---------- */
+.tennis-root .hero {
+  color: #fff;
+  border-radius: 0 0 28px 28px;
+  padding: 64px 20px 56px;
+  margin-bottom: 44px;
+}
+.tennis-root .hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.tennis-root .hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+.tennis-root .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--lime);
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 14px;
+  transition: color 0.25s ease;
+}
+.tennis-root .eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 2px;
+  background: var(--lime);
+  display: inline-block;
+  transition: background 0.25s ease;
+}
+.tennis-root .hero h1 {
+  color: #fff;
+  font-size: clamp(34px, 5vw, 54px);
+  line-height: 1.02;
+}
+.tennis-root .hero h1 span {
+  color: var(--lime);
+  transition: color 0.25s ease;
+}
+.tennis-root .hero p.lead {
+  color: #c9d3e2;
+  font-size: 17px;
+  max-width: 520px;
+  margin-top: 16px;
+  line-height: 1.55;
+}
+.tennis-root .hero-cta {
+  display: flex;
+  gap: 12px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+.tennis-root .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 14.5px;
+  border: 2px solid transparent;
+  text-decoration: none;
+}
+.tennis-root .btn-lime {
+  background: var(--lime);
+  color: #fff;
+}
+.tennis-root .btn-lime:hover {
+  background: var(--lime-dark);
+}
+.tennis-root .btn-ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+.tennis-root .btn-ghost:hover {
+  border-color: #fff;
+}
+.tennis-root .btn-dark {
+  background: var(--ink);
+  color: #fff;
+}
+.tennis-root .btn-dark:hover {
+  background: var(--ink-soft);
+}
+.tennis-root .btn-outline {
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.tennis-root .btn-outline:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.tennis-root .btn-danger {
+  background: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.tennis-root .btn-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+.tennis-root .btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.tennis-root .btn.small {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.tennis-root .hero-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 22px 26px;
+  min-width: 220px;
+}
+.tennis-root .hero-badge .k {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #9fb0c7;
+}
+.tennis-root .hero-badge .v {
+  font-family: 'Archivo Black';
+  font-size: 30px;
+  color: var(--lime);
+  margin-top: 4px;
+  transition: color 0.25s ease;
+}
+.tennis-root .hero-badge .row {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.tennis-root .hero-badge .row:last-child {
+  border-bottom: none;
+}
+
+.tennis-root section.block {
+  margin-bottom: 52px;
+}
+.tennis-root .block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.tennis-root .block-head h2 {
+  font-size: 26px;
+}
+.tennis-root .block-head .updated {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.tennis-root .cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.tennis-root .cards-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+@media (max-width: 820px) {
+  .tennis-root .cards-3 {
+    grid-template-columns: 1fr;
+  }
+  .tennis-root .cards-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tennis-root .card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+.tennis-root .card h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.tennis-root .card p {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+.tennis-root .pill {
+  display: inline-block;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.tennis-root .pill.lime {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: #fff;
+}
+.tennis-root .pill.gold {
+  background: #fbebd1;
+  border-color: #f0d6a5;
+  color: #8a5a0e;
+}
+
+.tennis-root .league-landing-card {
+  border-top: 5px solid var(--card);
+}
+.tennis-root .league-landing-card.green {
+  border-top-color: #6fa82c;
+}
+.tennis-root .league-landing-card.orange {
+  border-top-color: #e2822e;
+}
+.tennis-root .league-landing-card .lg-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.tennis-root .league-landing-card .lg-head .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+.tennis-root .league-landing-card.green .lg-head .dot {
+  background: #6fa82c;
+}
+.tennis-root .league-landing-card.orange .lg-head .dot {
+  background: #e2822e;
+}
+
+/* ---------- LADDER ---------- */
+.tennis-root .ladder-wrap {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  overflow-x: auto;
+}
+.tennis-root table.ladder {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+}
+.tennis-root table.ladder thead th {
+  text-align: left;
+  padding: 14px 12px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #9fb0c7;
+  background: var(--ink);
+  font-weight: 700;
+}
+.tennis-root table.ladder thead th.num,
+.tennis-root table.ladder td.num {
+  text-align: center;
+}
+.tennis-root table.ladder tbody tr {
+  border-bottom: 1px solid var(--line);
+}
+.tennis-root table.ladder tbody tr:nth-child(even) {
+  background: #fafbf7;
+}
+.tennis-root table.ladder tbody tr:hover {
+  background: #f0f3e8;
+}
+.tennis-root table.ladder td {
+  padding: 12px;
+  vertical-align: middle;
+}
+.tennis-root table.ladder td.team {
+  font-weight: 700;
+  color: var(--ink);
+}
+.tennis-root table.ladder td.pts {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 16px;
+}
+.tennis-root .rank-chip {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+}
+.tennis-root tr.rank-1 .rank-chip {
+  background: var(--lime);
+  border-color: var(--lime-dark);
+  color: #fff;
+}
+.tennis-root tr.rank-1 td.team::after {
+  content: ' \1F3C6';
+  font-size: 12px;
+}
+.tennis-root .ladder-note {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* ---------- RESULTS / DRAW ---------- */
+.tennis-root .week-group {
+  margin-bottom: 30px;
+}
+.tennis-root .week-title {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.tennis-root .match-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.tennis-root .match-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.tennis-root .match-teams {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Archivo Black';
+  font-size: 19px;
+  color: var(--ink);
+}
+.tennis-root .match-teams .vs {
+  color: var(--muted);
+  font-family: 'Work Sans';
+  font-size: 13px;
+  font-weight: 600;
+}
+.tennis-root .match-teams .win {
+  color: var(--lime-dark);
+}
+.tennis-root .rubber-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.tennis-root .rubber-table th {
+  text-align: left;
+  padding: 6px 8px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+}
+.tennis-root .rubber-table td {
+  padding: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.tennis-root .rubber-table td.score {
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+.tennis-root .rubber-table tr:last-child td {
+  border-bottom: none;
+}
+.tennis-root .type-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+
+/* ---------- TEAMS ---------- */
+.tennis-root .team-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+.tennis-root .team-card h3 {
+  margin-bottom: 10px;
+}
+.tennis-root .roster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tennis-root .chip {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+/* ---------- FORMS / ADMIN ---------- */
+.tennis-root .lockbox {
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  padding: 40px 30px;
+}
+.tennis-root .lockbox h2 {
+  margin-bottom: 8px;
+}
+.tennis-root .lockbox p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.tennis-root input[type='text'],
+.tennis-root input[type='number'],
+.tennis-root input[type='password'],
+.tennis-root input[type='date'],
+.tennis-root select,
+.tennis-root textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 9px;
+  border: 1.5px solid var(--line);
+  font-family: inherit;
+  font-size: 14.5px;
+  color: var(--text);
+  background: #fff;
+}
+.tennis-root input:focus,
+.tennis-root select:focus,
+.tennis-root textarea:focus,
+.tennis-root button:focus-visible {
+  outline: 3px solid rgba(111, 168, 44, 0.4);
+  outline-offset: 1px;
+  border-color: var(--lime-dark);
+}
+.tennis-root label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 5px;
+  letter-spacing: 0.2px;
+}
+.tennis-root .field {
+  margin-bottom: 14px;
+}
+.tennis-root .field-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.tennis-root .field-row .field {
+  flex: 1;
+  min-width: 140px;
+}
+.tennis-root .admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+.tennis-root .admin-tabs button {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  padding: 9px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.tennis-root .admin-tabs button.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.tennis-root .rubber-row {
+  background: var(--bg);
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+.tennis-root .rr-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.tennis-root .rr-top select {
+  max-width: 170px;
+}
+.tennis-root .rr-side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.tennis-root .rr-side-label {
+  width: 48px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.tennis-root .rr-side input[type='text'] {
+  flex: 1;
+  min-width: 130px;
+}
+.tennis-root .rr-side input[type='number'] {
+  width: 78px;
+  flex: none;
+}
+.tennis-root .rm-btn {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  padding: 4px 8px;
+}
+.tennis-root .helper-text {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 4px 0 14px;
+  line-height: 1.5;
+}
+
+.tennis-root .team-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.tennis-root .team-row .name {
+  flex: 1;
+  font-weight: 700;
+}
+.tennis-root .player-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 3px 4px 3px 10px;
+  font-size: 13px;
+}
+.tennis-root .player-tag button {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-weight: 700;
+}
+.tennis-root .empty {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--muted);
+  background: var(--card);
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+}
+.tennis-root .empty .display {
+  color: var(--ink);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.tennis-root .settings-form {
+  max-width: 520px;
+}
+.tennis-root hr.sep {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 26px 0;
+}
+.tennis-root footer {
+  background: var(--ink-dark);
+  color: #93a1b8;
+  padding: 34px 20px;
+  margin-top: 60px;
+  font-size: 13.5px;
+}
+.tennis-root footer .f-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.tennis-root footer strong {
+  color: #fff;
+}
+.tennis-root .loading-row {
+  color: var(--muted);
+  font-size: 14px;
+  padding: 20px;
+  text-align: center;
+}
+.tennis-root .draw-manage-row {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (max-width: 760px) {
+  .tennis-root .nav-inner {
+    flex-wrap: wrap;
+  }
+  .tennis-root nav.links {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+}

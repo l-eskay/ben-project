@@ -11,14 +11,14 @@ export default defineConfig({
       injectRegister: 'auto',
       includeAssets: ['app-icon.svg'],
       manifest: {
-        name: 'Template App',
-        short_name: 'Template',
-        description: 'Django + React template.',
+        name: 'Hot Shots Tennis League',
+        short_name: 'Hot Shots',
+        description: 'Ladders, draws, and results for the Hot Shots Tennis League at KT Academy.',
         start_url: '/',
         scope: '/',
         display: 'standalone',
-        background_color: '#ffffff',
-        theme_color: '#2563EB',
+        background_color: '#F5F6F1',
+        theme_color: '#122544',
         orientation: 'portrait',
         icons: [
           {

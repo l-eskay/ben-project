@@ -76,8 +76,8 @@ db-dump:
 	@mkdir -p $(DUMP_DIR)
 	@$(RESOLVE_DB_IP); \
 	echo ">> Opening tunnel localhost:$(LOCAL_PORT) -> $$DB_IP:$(DB_PORT) via $(SSH_HOST)"; \
-	ssh -f -N -L $(LOCAL_PORT):$$DB_IP:$(DB_PORT) $(SSH_HOST); \
-	TUNNEL_PID=$$(pgrep -f "ssh -f -N -L $(LOCAL_PORT):$$DB_IP:$(DB_PORT) $(SSH_HOST)"); \
+	ssh -N -L $(LOCAL_PORT):$$DB_IP:$(DB_PORT) $(SSH_HOST) & \
+	TUNNEL_PID=$$!; \
 	echo ">> Tunnel PID $$TUNNEL_PID"; sleep 1; \
 	echo ">> Dumping $(PGDATABASE) -> $(DUMP_FILE)"; \
 	pg_dump -Fc --no-owner --no-acl \
