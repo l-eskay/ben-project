@@ -35,3 +35,7 @@ backend/media/
 # Logs
 *.log
 logs/
+
+# Per-host Docker Compose overrides (e.g. port remapping behind an existing
+# reverse proxy) — deploy-target-specific, never shared across environments.
+docker-compose.override.yml
