@@ -147,8 +147,8 @@ if os.getenv("DB_NAME"):
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": os.getenv("DB_NAME"),
-            "USER": os.getenv("DB_USER", required=True),
-            "PASSWORD": os.getenv("DB_PASSWORD", required=True),
+            "USER": os.environ["DB_USER"],
+            "PASSWORD": os.environ["DB_PASSWORD"],
             "HOST": os.getenv("DB_HOST", "db"),
             "PORT": os.getenv("DB_PORT", "5432"),
             "CONN_MAX_AGE": 60,
